@@ -1,0 +1,120 @@
+1bean的作用域默认都是单例的
+
+
+********************************2.装配Bean***************************************
+2.1 声明bean
+ ----<bean id="duke" class="yiwa.springday_1.Juggler"/>
+ 2.1.1通过构造器注入
+     使用默认构造器和带参数的构造器
+     <bean id="duke1" class="yiwa.springday_1.Juggler">使用默认构造器
+     <bean id="duke1" class="yiwa.springday_1.Juggler">
+         <constructor-arg name="bags" value="15"/>
+     </bean> 使用带参数构造器
+     <bean id="poetDuke" class="yiwa.springday_1.PoeticJuggler">
+               <constructor-arg value="20"/>
+               <constructor-arg ref="sonnet29"/>
+     </bean>使用构造器注入对象应用
+ 2.1.2通过工厂方法创建bean
+     <bean id="theStage" class="yiwa.springday_1.Stage" factory-method="getInstance"/>
+ 2.1.3 bean作用域
+      所有springbean默认单例     <bean id="duke1" class="yiwa.springday_1.Juggler" scope="prototype">
+ 2.1.4初始化和销毁bean
+      <bean id="auditorium" class="yiwa.springday_1.Auditorium"
+            init-method="turnOnLights" destroy-method="turnOfflights"/>
+2.2注入bean属性
+ 2.2.1简单注入值和应用其他bean
+    <property name="" value=""/>
+    <property name="" ref=""/>
+ 2.2.1注入内部类
+    属性注入内部类
+    <property name="">
+       <bean class="" />
+    </property>
+    构造器注入内部类
+    <constructor-arg>
+       <bean class="">
+    </constructor-arg>
+ 2.2.2使用spring的命名空间p装配属性
+   <bean id="duke" class="yiwa.springday_1.Juggler"p:song="" p:instrument-ref=""/>
+   装配instrument属性 -ref后缀作为标识告知spring应该装配一个引用而不是字面值
+   ---装配null值
+      <property name=""><null/></property>
+ 2.2.3 装配集合
+    装配list或者set
+       <bean id="bank" class="yiwa.springday_1.OneManBand">
+         <property name="instruments">
+            <list>        <!--<set>-->
+                <ref bean="guitar"/>
+                <ref bean="cymbal"/>
+                <ref bean="harmonical"/>
+            </list>
+         </property>
+      </bean>
+    装配map
+        <bean id="bank1" class="yiwa.springday_1.OneManBand1">
+            <property name="instrumentMap">
+                <map>
+                    <entry key="GUITAR" value-ref="guitar"/>
+                    <entry key="CYMBAL" value-ref="cymbal"/>
+                    <entry key="HARMONICA" value-ref="harmonical"/>
+                </map>
+            </property>
+        </bean>
+ 2.3使用表达式装配（spring表达式语言SpEL spring Expression Language）
+     --使用bean的id来应用bean
+        <bean id="saxophone" class="XXX"/>
+        <property name="instrument" value="#{saxophone}">
+        等同于<property name="instrument" value="saxophone">
+     --调用的方法和访问对象的属性
+       <bean id=car1 class="xxx">
+         <property name="song" value=#{kenny.song}>
+       </bean>
+       <property name="song" value=#{kenny.getSong().ToUpperCase()}>
+       <property name="multipler" value="#{T(java.lang.Math).PI}">  //T()调用类
+         作用域的方法和常量
+     --对值进行算数，关系，逻辑运算
+     --正则表达式匹配
+     --集合操作
+********************************3.最小化spring XML配置***************************************
+3.1自动装配(autowiring)Bean属性
+  3.1.1 四种类型自动装配（byName byType constructor autodetect）
+      <bean id="instrument" class="yiwa.springday_2.Saxophone"/>
+      <bean id="instrument1" class="yiwa.springday_2.Guitar"/>
+      <bean id="kenny" class="yiwa.springday_2.Instrumentalist" autowire="constructor">
+          <property name="song" value="需要人陪"/>
+      </bean>
+3.2使用注解装配  <conttext:annotation-config />
+   spring 支持的几种不同的注解配置
+     --spring自带的@Autowired注解
+     --JSR-330的@Inject注解
+     --JSR-250的@Resource注解
+
+     1.用@Autowired 对setter函数进行注解（注解属性方法构造器），当spring发现次注解后尝试对该方法执行byType自动装配
+     @Autowired
+      public void setInstrument(Instrument instrument){
+            System.out.println("注入乐器");
+            this.instrument=instrument;
+      }
+     2用@Autowired直接注解属性，并删除setter方法
+         @Autowired                                    @Autowired（required=false）
+         private Instrument instrument;                private Instrument instrument;
+     3限定歧义性依赖
+         @Autowired
+         @Qualifier("guitar")  //限定注释将自动注释的byType转化为byName
+         private Instrument instrument;
+
+     4在注解中使用表达式@Value
+        @Value("两只老鼠") <!--@Value("#{bean.property}")-->
+        private String song;
+        ----结合SpEL将使@Value赋予魔力，除了静态值可以装配动态的求值计算
+
+3.3 自动检测bean    <conttext:component-scan >元素除了完成<conttext:annotation-config />一样的工作外
+                    还允许spring自动检测Bean和定义bean，是的大多数bean能够实现定义和装配
+          <conttext:component-scan base-package="yiwa.springday_2">
+          </conttext:component-scan>
+     --默认情况下<conttext:component-scan>查找使用构造性注解标注的类，这些特殊注解为：
+        a. @Component---通用的构造型注解，标识该类为spring组件
+        b. @Controller--标识将该类定义为SpringMVC Controller
+        c. @Repository--标识将该类定义为数据仓库
+        d. @Service--标识将该类定义为服务
+        d. 使用@Component标注的任意自定义注解

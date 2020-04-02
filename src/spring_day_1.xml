@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+   <!--声明bean--><!--声明bean--><!--声明bean--><!--声明bean--><!--声明bean--><!--声明bean--><!--声明bean-->
+    <bean id="duke" class="yiwa.springday_1.Juggler"/>
+    <!--使用构造器注入-->
+    <bean id="duke1" class="yiwa.springday_1.Juggler">
+        <constructor-arg name="bags" value="15"/>
+    </bean>
+    <bean id="sonnet29" class="yiwa.springday_1.Sonnet29"/>
+    <!--使用构造器注入对象应用-->
+    <bean id="poetDuke" class="yiwa.springday_1.PoeticJuggler">
+          <constructor-arg value="20"/>
+          <constructor-arg ref="sonnet29"/>
+    </bean>
+    <!--使用工厂方法创建bean-->
+    <bean id="theStage" class="yiwa.springday_1.Stage" factory-method="getInstance"/>
+    <!--初始化和销毁bean-->
+    <bean id="auditorium" class="yiwa.springday_1.Auditorium"
+       init-method="turnOnLights" destroy-method="turnOfflights"/>
+    <!--声明bean--><!--声明bean--><!--声明bean--><!--声明bean--><!--声明bean--><!--声明bean--><!--声明bean-->
+
+    <!--注入bean属性-->    <!--注入bean属性-->    <!--注入bean属性-->    <!--注入bean属性-->    <!--注入bean属性-->
+   <!--配置list set和Array-->
+    <bean id="guitar" class="yiwa.springday_1.Guitar" />
+    <bean id="cymbal" class="yiwa.springday_1.Cymbal"/>
+    <bean id="harmonical" class="yiwa.springday_1.Harmonical"/>
+    <bean id="bank" class="yiwa.springday_1.OneManBand">
+        <property name="instruments">
+            <list>
+                <ref bean="guitar"/>
+                <ref bean="cymbal"/>
+                <ref bean="harmonical"/>
+            </list>
+        </property>
+    </bean>
+    <bean id="bank1" class="yiwa.springday_1.OneManBand1">
+        <property name="instrumentMap">
+            <map>
+                <entry key="GUITAR" value-ref="guitar"/>
+                <entry key="CYMBAL" value-ref="cymbal"/>
+                <entry key="HARMONICA" value-ref="harmonical"/>
+            </map>
+        </property>
+    </bean>
+</beans>
