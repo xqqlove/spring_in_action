@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/aop https://www.springframework.org/schema/aop/spring-aop.xsd">
+    <context:component-scan base-package="yiwa.springday_4"></context:component-scan>
+    <aop:aspectj-autoproxy proxy-target-class="true"/>
+    <bean id="bank" class="yiwa.springday_4.Band"/>
+    <bean id="audience" class="yiwa.springday_4.Audience"/>
+    <bean id="magician" class="yiwa.springday_4.Magician"/>
+    <bean id="volunteer" class="yiwa.springday_4.Volunteer"/>
+    <aop:config>
+        <!--<aop:aspect ref="audience">-->
+            <!--<aop:before pointcut="execution(* yiwa.springday_4.Perform.perform(..))" method="takeSeats"/>-->
+            <!--<aop:before pointcut="execution(* yiwa.springday_4.Perform.perform(..))" method="turnOffCellPhones"/>-->
+            <!--<aop:after-returning pointcut="execution(* yiwa.springday_4.Perform.perform(..))" method="applaud"/>-->
+            <!--<aop:after-throwing pointcut="execution(* yiwa.springday_4.Perform.perform(..))" method="demandRefound"/>-->
+         <!--<aop:pointcut id="performance" expression="execution(* yiwa.springday_4.Perform.perform(..))" />-->
+            <!--<aop:around pointcut-ref="performance" method="watchPerformce"/>-->
+        <!--</aop:aspect>-->
+        <aop:aspect ref="magician">
+            <aop:pointcut id="thinking" expression="execution(* yiwa.springday_4.Thinker.thinkOfSomething(String)) and args(thoughts)"/>
+            <aop:before pointcut-ref="thinking" method="interceptionThoughts" arg-names="thoughts"/>
+        </aop:aspect>
+    </aop:config>
+
+</beans>

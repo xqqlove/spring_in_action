@@ -19,8 +19,17 @@
       <root url="jar://$PROJECT_DIR$/lib/aopalliance-1.0.jar!/" />
       <root url="jar://$PROJECT_DIR$/lib/spring-tx-5.2.3.RELEASE.jar!/" />
       <root url="jar://$PROJECT_DIR$/lib/spring-test-5.2.3.RELEASE.jar!/" />
+      <root url="jar://D:/aspectj-1.9.4.jar!/" />
+      <root url="jar://D:/aspectj-1.9.4/files/lib/aspectjrt.jar!/" />
+      <root url="jar://D:/aspectj-1.9.4/files/lib/aspectjtools.jar!/" />
+      <root url="jar://D:/aspectj-1.9.4/files/lib/aspectjweaver.jar!/" />
     </CLASSES>
-    <JAVADOC />
-    <SOURCES />
+    <JAVADOC>
+      <root url="jar://D:/aspectj-1.9.4.jar!/files/doc/runtime-apidocs" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://D:/aspectj-1.9.4.jar!/files/doc/examples" />
+      <root url="jar://D:/aspectj-1.9.4.jar!/files/doc/examples/ltw" />
+    </SOURCES>
   </library>
 </component>
