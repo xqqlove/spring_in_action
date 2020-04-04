@@ -1,0 +1,5 @@
+https://blog.csdn.net/Jungle_Rao/article/details/81274720?depth_1-utm_source=distribute.pc_relevant.none-task-blog-BlogCommendFromBaidu-1&utm_source=distribute.pc_relevant.none-task-blog-BlogCommendFromBaidu-1
+1 JDBC
+2 数据库连接池
+3 JDB模板(jdbcTemplate SimpleJDBCTemplate)
+4 ORM(object-relational mapping)对象关系映射框架   例如：Hibernate  myBatis

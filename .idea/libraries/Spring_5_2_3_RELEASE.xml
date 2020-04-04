@@ -23,6 +23,7 @@
       <root url="jar://D:/aspectj-1.9.4/files/lib/aspectjrt.jar!/" />
       <root url="jar://D:/aspectj-1.9.4/files/lib/aspectjtools.jar!/" />
       <root url="jar://D:/aspectj-1.9.4/files/lib/aspectjweaver.jar!/" />
+      <root url="jar://D:/java/mysql-connector-java-5.1.48/mysql-connector-java-5.1.48/mysql-connector-java-5.1.48-bin.jar!/" />
     </CLASSES>
     <JAVADOC>
       <root url="jar://D:/aspectj-1.9.4.jar!/files/doc/runtime-apidocs" />
