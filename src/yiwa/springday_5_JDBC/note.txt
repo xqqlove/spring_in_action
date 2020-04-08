@@ -1,4 +1,5 @@
 https://blog.csdn.net/Jungle_Rao/article/details/81274720?depth_1-utm_source=distribute.pc_relevant.none-task-blog-BlogCommendFromBaidu-1&utm_source=distribute.pc_relevant.none-task-blog-BlogCommendFromBaidu-1
+https://blog.csdn.net/CrankZ/article/details/82874158?depth_1-utm_source=distribute.pc_relevant.none-task-blog-BlogCommendFromBaidu-2&utm_source=distribute.pc_relevant.none-task-blog-BlogCommendFromBaidu-2
 1 JDBC
 2 数据库连接池
 3 JDB模板(jdbcTemplate SimpleJDBCTemplate)
